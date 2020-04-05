@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGameLesson1", "MonoGameLesson1\MonoGameLesson1.csproj", "{E405E071-219E-4940-819F-22DAEA9CCD1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalloonSpriteGame", "BalloonSpriteGame\BalloonSpriteGame.csproj", "{14383763-C0D0-4306-8B08-9D69117B4F16}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E405E071-219E-4940-819F-22DAEA9CCD1E}.Debug|x86.ActiveCfg = Debug|x86
+		{E405E071-219E-4940-819F-22DAEA9CCD1E}.Debug|x86.Build.0 = Debug|x86
+		{E405E071-219E-4940-819F-22DAEA9CCD1E}.Release|x86.ActiveCfg = Release|x86
+		{E405E071-219E-4940-819F-22DAEA9CCD1E}.Release|x86.Build.0 = Release|x86
+		{14383763-C0D0-4306-8B08-9D69117B4F16}.Debug|x86.ActiveCfg = Debug|x86
+		{14383763-C0D0-4306-8B08-9D69117B4F16}.Debug|x86.Build.0 = Debug|x86
+		{14383763-C0D0-4306-8B08-9D69117B4F16}.Release|x86.ActiveCfg = Release|x86
+		{14383763-C0D0-4306-8B08-9D69117B4F16}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A63655FE-65DA-4EB6-83D5-8C015688015A}
+	EndGlobalSection
+EndGlobal
