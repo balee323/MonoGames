@@ -1,6 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using System;
+using System.Threading.Tasks;
 
 namespace BalloonSpriteGame
 {
@@ -11,9 +15,13 @@ namespace BalloonSpriteGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D balloon, background;
-        Vector2 balloonPosition;
-        Vector2 balloonOrigin;
+        Texture2D balloon, cannonBarrel, background;
+        Vector2 balloonPosition, cannonBarrelPosition;
+        Vector2 balloonOrigin, cannonBarrelOrigin;
+
+        SoundEffect ding;
+
+        float angle;
 
         public BalloonGame()
         {
@@ -45,10 +53,38 @@ namespace BalloonSpriteGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
             balloon = Content.Load<Texture2D>("spr_lives");
             background = Content.Load<Texture2D>("spr_background");
+            cannonBarrel = Content.Load<Texture2D>("spr_cannon_barrel");
+
+            ding = Content.Load<SoundEffect>("snd_collect_points");
 
             // TODO: use this.Content to load your game content here
-            //balloonOrigin = new Vector2(balloon.Width / 2, balloon.Height); //this is most efficient as this value doesn't change
+            balloonOrigin = new Vector2(balloon.Width / 2, balloon.Height); //this is most efficient as this value doesn't change
+            cannonBarrelOrigin = new Vector2(cannonBarrel.Height, cannonBarrel.Height) / 2;
+            cannonBarrelPosition = new Vector2(72, 405);
+
+            MediaPlayer.Play(Content.Load<Song>("snd_music"), TimeSpan.FromMinutes(2.25));
+            MediaPlayer.IsRepeating = true; //this will repeat
+
+            //PlayDing();
+
         }
+
+
+        private void PlayDing()
+        {
+            for(int i = 0; i < 2000; i++)
+            {
+                ding.Play();
+                Task.Delay(200).Wait();
+                ding.Play();
+                Task.Delay(200).Wait();
+                ding.Play();
+                Task.Delay(400).Wait();
+                ding.Play();
+            }
+
+        }
+
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -83,7 +119,11 @@ namespace BalloonSpriteGame
             //but there is another way to do this...
             //option3
             balloonPosition = new Vector2(currentMouseState.X, currentMouseState.Y);
-            balloonOrigin = new Vector2(balloon.Width / 2, balloon.Height); //this is not efficient, we only need to do this once
+           
+
+            double opposite = currentMouseState.Y - cannonBarrelPosition.Y;
+            double adjacent = currentMouseState.X - cannonBarrelPosition.X;
+            angle = (float)Math.Atan2(opposite, adjacent);
 
             base.Update(gameTime);
         }
@@ -100,6 +140,7 @@ namespace BalloonSpriteGame
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
             spriteBatch.Draw(balloon, balloonPosition - balloonOrigin, Color.White); //new way (vector math)...
             //spriteBatch.Draw(balloon, balloonPosition, Color.White); //old way
+            spriteBatch.Draw(cannonBarrel, cannonBarrelPosition, null, Color.White, angle, cannonBarrelOrigin, 1.0f, SpriteEffects.None, 0);
             spriteBatch.End();
 
             // TODO: Add your drawing code here
