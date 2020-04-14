@@ -82,7 +82,6 @@ namespace BalloonSpriteGame
                 Task.Delay(400).Wait();
                 ding.Play();
             }
-
         }
 
 
@@ -108,6 +107,8 @@ namespace BalloonSpriteGame
             // TODO: Add your update logic here
             MouseState currentMouseState = Mouse.GetState();
 
+            ButtonState buttonStateLeft = currentMouseState.LeftButton;
+
             //option1 -- ballon will follow mouse, but balloon will be drawn to left of mouse pointer
             //balloonPosition = new Vector2(currentMouseState.X, currentMouseState.Y);
 
@@ -121,9 +122,25 @@ namespace BalloonSpriteGame
             balloonPosition = new Vector2(currentMouseState.X, currentMouseState.Y);
            
 
-            double opposite = currentMouseState.Y - cannonBarrelPosition.Y;
-            double adjacent = currentMouseState.X - cannonBarrelPosition.X;
-            angle = (float)Math.Atan2(opposite, adjacent);
+            if (currentMouseState.LeftButton == ButtonState.Pressed)
+            {
+                if (currentMouseState.X < 200 || currentMouseState.Y < 50)
+                {
+                    //angle = 0;
+                    angle = 200; //I like this better
+                                 //cannonBarrelPosition = Vector2.Zero;
+                }
+                else
+                {
+                    double opposite = currentMouseState.Y - cannonBarrelPosition.Y;
+                    double adjacent = currentMouseState.X - cannonBarrelPosition.X;
+                    angle = (float)Math.Atan2(opposite, adjacent);
+                }
+            }
+            
+
+
+
 
             base.Update(gameTime);
         }
